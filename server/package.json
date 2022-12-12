@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server for next-auth-grpc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "codegen": "grpc_tools_node_protoc -I ../proto --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:./generated --grpc_out=grpc_js:./generated --ts_out=grpc_js:./generated ../proto/*.proto",
+    "dev:server": "nodemon ./index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "1.8.0",
+    "@types/google-protobuf": "3.15.6",
+    "@types/node": "18.11.11",
+    "nodemon": "2.0.20",
+    "google-protobuf": "3.21.2",
+    "grpc_tools_node_protoc_ts": "5.3.2",
+    "grpc-tools": "1.12.3",
+    "ts-node-dev": "2.0.0",
+    "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "grpc_tools_node_protoc_ts": "5.3.2"
+  }
+}

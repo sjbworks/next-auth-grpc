@@ -1,5 +1,5 @@
-import { UserRequest, UserResponse, User } from "../generated/user_pb";
-import { UserManageService } from "../generated/user_grpc_pb";
+import { UserRequest, UserResponse, User } from "./generated/user_pb";
+import { UserManageService } from "./generated/user_grpc_pb";
 import {
   sendUnaryData,
   Server,

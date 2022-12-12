@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { User } from "../../../generated/user_pb";
+import { User } from "../../../../server/generated/user_pb";
 import { apiClient } from "../../../lib";
 
 export default async function handler(
