@@ -18,6 +18,7 @@ const getUser = (
   callback: sendUnaryData<UserResponse>
 ) => {
   const requestId = call.request.getId();
+  console.log(requestId);
   const targetedUser = users.get(requestId);
   const res = new UserResponse();
   if (!targetedUser) {
