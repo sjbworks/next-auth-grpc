@@ -18,7 +18,7 @@ const getUser = (
   callback: sendUnaryData<UserResponse>
 ) => {
   const requestId = call.request.getId();
-  console.log(requestId);
+  console.log("requestId:", requestId);
   const targetedUser = users.get(requestId);
   const res = new UserResponse();
   if (!targetedUser) {
@@ -41,7 +41,6 @@ const startServer = () => {
       if (error) {
         console.error(error);
       }
-
       server.start();
       console.log(`server start listing on port ${port}`);
     }
