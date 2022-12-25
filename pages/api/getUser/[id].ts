@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { User, UserRequest } from "../../../../server/generated/user_pb";
+import { User, UserRequest } from "../../../generated/user_pb";
 import { apiClient } from "../../../lib";
 
 export default async function handler(
@@ -25,7 +25,7 @@ export default async function handler(
           message: error?.message || "error",
         });
       }
-      return resolve(response?.toObject);
+      return resolve(response?.toObject());
     });
   });
   nextRes.status(200).json(response);

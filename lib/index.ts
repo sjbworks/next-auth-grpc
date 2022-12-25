@@ -1,7 +1,7 @@
 import { credentials } from "@grpc/grpc-js";
-import { UserManageClient } from "../../server/generated/user_grpc_pb";
+import { UserManageClient } from "../generated/user_grpc_pb";
 
-const serverURL = "localhost:8888";
+const serverURL = "localhost:8000";
 export const apiClient = new UserManageClient(
   serverURL,
   credentials.createInsecure()

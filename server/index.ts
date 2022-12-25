@@ -1,10 +1,11 @@
-import { UserRequest, UserResponse, User } from "./generated/user_pb";
-import { UserManageService } from "./generated/user_grpc_pb";
+import { UserRequest, UserResponse, User } from "../generated/user_pb";
+import { UserManageService } from "../generated/user_grpc_pb";
 import {
   sendUnaryData,
   Server,
   ServerCredentials,
   ServerUnaryCall,
+  StatusObject,
 } from "@grpc/grpc-js";
 
 const users = new Map([
@@ -17,25 +18,28 @@ const getUser = (
   call: ServerUnaryCall<UserRequest, UserResponse>,
   callback: sendUnaryData<UserResponse>
 ) => {
-  const requestId = call.request.getId();
-  console.log("requestId:", requestId);
-  const targetedUser = users.get(requestId);
-  const res = new UserResponse();
-  if (!targetedUser) {
-    throw new Error("User is not found.");
+  try {
+    const requestId = call.request.getId();
+    const targetedUser = users.get(requestId);
+    const res = new UserResponse();
+    if (!targetedUser) {
+      throw new Error("User is not found.");
+    }
+    const user = new User();
+    user.setId(targetedUser.id);
+    user.setName(targetedUser.name);
+    res.setUser(user);
+    callback(null, res);
+  } catch (e) {
+    callback({ code: 500 });
   }
-  const user = new User();
-  user.setId(targetedUser.id);
-  user.setName(targetedUser.name);
-  res.setUser(user);
-  callback(null, res);
 };
 
 const startServer = () => {
   const server = new Server();
   server.addService(UserManageService, { getUser });
   server.bindAsync(
-    `0.0.0.0:8888`,
+    `0.0.0.0:8000`,
     ServerCredentials.createInsecure(),
     (error, port) => {
       if (error) {
