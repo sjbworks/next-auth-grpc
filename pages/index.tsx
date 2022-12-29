@@ -4,6 +4,8 @@ import styles from "../styles/Home.module.css";
 import { NextPage } from "next";
 import { MouseEvent, useState } from "react";
 import { User } from "../generated/user_pb";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Login from "../components/login";
 
 export default function Home() {
   const [user, setUser] = useState<User.AsObject>();
@@ -14,6 +16,8 @@ export default function Home() {
     const json = await response.json();
     setUser(json.user);
   };
+
+  const { data: session } = useSession();
   return (
     <div className={styles.container}>
       <Head>
@@ -56,6 +60,7 @@ export default function Home() {
         </div>
         <span>{user?.id}</span>
         <span>{user?.name}</span>
+        <Login />
       </main>
     </div>
   );

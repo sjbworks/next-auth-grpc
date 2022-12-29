@@ -6,9 +6,9 @@ export default function Login() {
     return (
       <>
         Sign in as{session?.user?.email}
-        <button onClick={() => signOut}>ログアウトする</button>
+        <button onClick={() => signOut()}>ログアウトする</button>
       </>
     );
   }
-  return <button onClick={() => signIn}>ログインする</button>;
+  return <button onClick={() => signIn("google")}>Googleにログインする</button>;
 }
